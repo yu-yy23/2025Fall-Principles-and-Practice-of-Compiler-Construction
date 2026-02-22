@@ -1,0 +1,8 @@
+image: registry.cn-hangzhou.aliyuncs.com/pairshoe/minidecaf-tests:latest
+
+test:
+  script:
+    - bash ./prepare.sh
+    - if [ -d 'minidecaf-tests' ]; then rm -r minidecaf-tests; fi
+    - git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@git.tsinghua.edu.cn/compiler24/minidecaf-tests.git
+    - cd ./minidecaf-tests && PROJ_PATH=.. USE_PARALLEL=false ./check.sh
